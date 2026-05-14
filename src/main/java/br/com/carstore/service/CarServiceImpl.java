@@ -14,7 +14,7 @@ public class CarServiceImpl implements CarService {
     private final CarDao dao;
 
     public CarServiceImpl(CarDao dao) {
-         this.dao = dao;
+        this.dao = dao;
     }
 
     @Override

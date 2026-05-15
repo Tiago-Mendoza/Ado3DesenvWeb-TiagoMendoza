@@ -1,48 +1,14 @@
 package br.com.carstore.controller;
 
-import br.com.carstore.dto.CarDTO;
-import br.com.carstore.dto.CarResponseBody;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import br.com.carstore.service.CarService;
+@Controller
+public class LoginController {
+    @GetMapping("/login")
+    public String login() {
 
-import java.util.List;
+        return "/admin/login"; // templates/login.html
 
-@org.springframework.web.bind.annotation.RestController
-public class RestController {
-
-    @Autowired
-    private final CarService carService;
-
-    public RestController(CarService service) {
-        this.carService = service;
     }
-
-    @GetMapping("/api/cars")
-    public ResponseEntity<CarResponseBody> home() {
-        List<CarDTO> allCars = carService.findAll();
-        CarResponseBody carResponseBody = new CarResponseBody(allCars);
-        return ResponseEntity.ok(carResponseBody);
-    }
-
-    @PostMapping("/api/cars")
-    public ResponseEntity<CarDTO> createCar(@RequestBody CarDTO car) {
-        this.carService.save(car);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/api/cars/{id}")
-    public ResponseEntity<CarDTO> deleteCar(@PathVariable String id) {
-        this.carService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/api/cars/{id}")
-    public ResponseEntity<CarDTO> updateCar(@PathVariable String id, @RequestBody CarDTO carDTO) {
-        this.carService.update(id, carDTO);
-        return ResponseEntity.ok(carDTO);
-    }
-
 }
